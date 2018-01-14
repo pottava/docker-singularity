@@ -1,18 +1,9 @@
-# Singularity v2.4
-#
-# docker run --rm pottava/singularity:2.4 --version
-# docker run --rm -it --privileged -v $(pwd):/work --entrypoint sh pottava/singularity:2.4
-# docker run --rm -v $(pwd):/work pottava/singularity:2.4 \
-#     pull --name hello-world.simg shub://vsoch/hello-world
-# docker run --rm -it --privileged -v $(pwd):/work pottava/singularity:2.4 \
-#     shell hello-world.simg
-
 FROM alpine:3.7
 
 ENV SINGULARITY_VERESION=2.4.2
 
-RUN apk --no-cache add bash python
-RUN apk --no-cache add --virtual build-dependencies curl tar make gcc g++ linux-headers \
+RUN apk --no-cache add bash tar python squashfs-tools
+RUN apk --no-cache add --virtual build-dependencies curl make gcc g++ linux-headers \
     && repo=https://github.com/singularityware/singularity/releases/download \
     && curl --location --silent --show-error --out singularity.tar.gz \
        ${repo}/${SINGULARITY_VERESION}/singularity-${SINGULARITY_VERESION}.tar.gz \
@@ -25,7 +16,22 @@ RUN apk --no-cache add --virtual build-dependencies curl tar make gcc g++ linux-
     && rm -rf singularity* \
     && apk del --purge -r build-dependencies
 
+RUN apk --no-cache add --virtual build-dependencies curl gnupg openssl \
+    && cd /usr/local/bin \
+    && curl --location --silent --show-error --out gosu \
+       https://github.com/tianon/gosu/releases/download/1.8/gosu-amd64 \
+    && curl --location --silent --show-error --out gosu.asc \
+       https://github.com/tianon/gosu/releases/download/1.8/gosu-amd64.asc \
+    && gpg --keyserver ha.pool.sks-keyservers.net \
+       --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+    && gpg --batch --verify gosu.asc gosu \
+    && chmod +x gosu \
+    && apk del --purge -r build-dependencies \
+    && rm -r gosu.asc /root/.gnupg/
+
 WORKDIR /work
 
-ENTRYPOINT ["singularity"]
-CMD ["--help"]
+ADD entrypoint.sh /sbin/
+RUN chmod 755 /sbin/entrypoint.sh
+
+ENTRYPOINT ["/sbin/entrypoint.sh"]
