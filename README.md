@@ -9,14 +9,32 @@ http://singularity.lbl.gov/
 
 ## Usage
 
-```
-$ docker run --rm -it --privileged -v $(pwd):/work --entrypoint sh \
-    pottava/singularity:2.4
-```
+### Test
 
 ```
-$ docker run --rm -v $(pwd):/work pottava/singularity:2.4 \
-    pull --name hello-world.simg shub://vsoch/hello-world
-$ docker run --rm -it --privileged -v $(pwd):/work \
-    pottava/singularity:2.4 shell hello-world.simg
+$ docker run --rm pottava/singularity:2.4 --version
+$ docker run --rm -it --privileged -v $(pwd):/work pottava/singularity:2.4 sh
+```
+
+### Configure
+
+Install docker and create a following shell script:
+
+```
+$ sudo sh -c 'cat << EOF > /usr/local/bin/singularity
+#!/bin/sh
+docker run --rm -it --privileged -e UID=\$(id -u) -e GID=\$(id -g) \\
+  -v \$(pwd):/home/singularity -v /tmp:/tmp -w /home/singularity \\
+  pottava/singularity:2.4 "\$@"
+EOF'
+sudo chmod +x /usr/local/bin/singularity
+```
+
+### Run
+
+```
+$ singularity pull --name hello.simg shub://vsoch/hello-world
+$ singularity run hello.simg
+$ singularity exec hello.simg ls
+$ singularity shell hello.simg
 ```
