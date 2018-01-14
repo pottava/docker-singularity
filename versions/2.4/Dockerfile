@@ -26,8 +26,8 @@ RUN apk --no-cache add --virtual build-dependencies curl gnupg openssl \
        --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
     && gpg --batch --verify gosu.asc gosu \
     && chmod +x gosu \
-    && apk del --purge -r build-dependencies \
-    && rm -r gosu.asc /root/.gnupg/
+    && rm -r gosu.asc \
+    && apk del --purge -r build-dependencies
 
 WORKDIR /work
 
