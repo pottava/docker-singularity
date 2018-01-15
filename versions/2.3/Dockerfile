@@ -16,17 +16,10 @@ RUN apk --no-cache add --virtual build-dependencies curl make gcc g++ linux-head
     && rm -rf singularity* \
     && apk del --purge -r build-dependencies
 
-RUN apk --no-cache add --virtual build-dependencies curl gnupg openssl \
-    && cd /usr/local/bin \
-    && curl --location --silent --show-error --out gosu \
+RUN apk --no-cache add --virtual build-dependencies curl openssl \
+    && curl --location --silent --show-error --out /usr/local/bin/gosu \
        https://github.com/tianon/gosu/releases/download/1.8/gosu-amd64 \
-    && curl --location --silent --show-error --out gosu.asc \
-       https://github.com/tianon/gosu/releases/download/1.8/gosu-amd64.asc \
-    && gpg --keyserver ha.pool.sks-keyservers.net \
-       --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-    && gpg --batch --verify gosu.asc gosu \
-    && chmod +x gosu \
-    && rm -r gosu.asc \
+    && chmod 755 /usr/local/bin/gosu \
     && apk del --purge -r build-dependencies
 
 WORKDIR /work
