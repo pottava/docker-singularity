@@ -6,6 +6,7 @@ http://singularity.lbl.gov/
 
 ・latest ([versions/2.4/Dockerfile](https://github.com/pottava/docker-singularity/blob/master/versions/2.4/Dockerfile))  
 ・2.4 ([versions/2.4/Dockerfile](https://github.com/pottava/docker-singularity/blob/master/versions/2.4/Dockerfile))  
+・2.3 ([versions/2.3/Dockerfile](https://github.com/pottava/docker-singularity/blob/master/versions/2.3/Dockerfile))  
 
 ## Usage
 
