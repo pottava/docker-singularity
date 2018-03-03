@@ -25,17 +25,30 @@ Install docker and create a following shell script:
 $ sudo sh -c 'cat << EOF > /usr/local/bin/singularity
 #!/bin/sh
 docker run --rm -it --privileged -e UID=\$(id -u) -e GID=\$(id -g) \\
+  -v /var/run/docker.sock:/var/run/docker.sock \\
   -v \$(pwd):/home/singularity -v /tmp:/tmp -w /home/singularity \\
   pottava/singularity:2.4 "\$@"
 EOF'
-sudo chmod +x /usr/local/bin/singularity
+$ sudo chmod +x /usr/local/bin/singularity
 ```
 
 ### Run
+
+- v2.4 ~
 
 ```
 $ singularity pull --name hello.simg shub://vsoch/hello-world
 $ singularity run hello.simg
 $ singularity exec hello.simg ls
 $ singularity shell hello.simg
+```
+
+- ~ v2.3
+
+```
+$ docker run --rm -it --privileged -v $(pwd):/tmp pottava/singularity:2.3 sh -c \
+    "singularity create --size 100 alpine.simg && cp /work/alpine.img /tmp/"
+$ singularity import alpine.simg docker://alpine:3.7
+$ singularity exec alpine.simg cat /etc/os-release
+$ singularity shell alpine.simg
 ```

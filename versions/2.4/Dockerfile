@@ -1,3 +1,8 @@
+# Singularity v2.4
+#
+# docker run --rm pottava/singularity:2.4
+# docker run --rm --entrypoint cat pottava/singularity:2.4 /usr/local/etc/singularity/singularity.conf
+
 FROM alpine:3.7
 
 ENV SINGULARITY_VERESION=2.4.2
