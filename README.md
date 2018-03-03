@@ -46,8 +46,9 @@ $ singularity shell hello.simg
 - ~ v2.3
 
 ```
-$ docker run --rm -it --privileged -v $(pwd):/tmp pottava/singularity:2.3 sh -c \
-    "singularity create --size 100 alpine.simg && cp /work/alpine.img /tmp/"
+$ docker run --rm -it --privileged -v $(pwd):/tmp \
+    --entrypoint sh pottava/singularity:2.3 -c \
+    "singularity create --size 100 alpine.simg && cp /work/alpine.simg /tmp/"
 $ singularity import alpine.simg docker://alpine:3.7
 $ singularity exec alpine.simg cat /etc/os-release
 $ singularity shell alpine.simg
