@@ -1,8 +1,13 @@
+# Singularity v2.3
+#
+# docker run --rm pottava/singularity:2.3
+# docker run --rm --entrypoint cat pottava/singularity:2.3 /usr/local/etc/singularity/singularity.conf
+
 FROM alpine:3.7
 
 ENV SINGULARITY_VERESION=2.3.2
 
-RUN apk --no-cache add bash tar python squashfs-tools
+RUN apk --no-cache add bash tar python squashfs-tools e2fsprogs
 RUN apk --no-cache add --virtual build-dependencies curl make gcc g++ linux-headers \
     && repo=https://github.com/singularityware/singularity/releases/download \
     && curl --location --silent --show-error --out singularity.tar.gz \
