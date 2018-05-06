@@ -5,7 +5,7 @@
 
 FROM alpine:3.7
 
-ENV SINGULARITY_VERESION=2.4.5
+ENV SINGULARITY_VERESION=2.4.6
 
 RUN apk --no-cache add bash tar python squashfs-tools
 RUN apk --no-cache add --virtual build-dependencies curl make gcc g++ linux-headers \
