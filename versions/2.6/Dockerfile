@@ -5,12 +5,12 @@
 
 FROM alpine:3.8
 
-ENV SINGULARITY_VERESION=2.6.0
+ENV SINGULARITY_VERESION=2.6.1
 
 RUN apk --no-cache add bash tar python squashfs-tools
 RUN apk --no-cache add --virtual build-dependencies curl make gcc g++ \
        linux-headers libarchive-dev file \
-    && repo=https://github.com/singularityware/singularity/releases/download \
+    && repo=https://github.com/sylabs/singularity/releases/download \
     && curl --location --silent --show-error --out singularity.tar.gz \
        ${repo}/${SINGULARITY_VERESION}/singularity-${SINGULARITY_VERESION}.tar.gz \
     && tar xvf singularity.tar.gz \
@@ -22,17 +22,11 @@ RUN apk --no-cache add --virtual build-dependencies curl make gcc g++ \
     && rm -rf singularity* \
     && apk del --purge -r build-dependencies
 
-RUN apk --no-cache add --virtual build-dependencies curl gnupg openssl \
+RUN apk --no-cache add --virtual build-dependencies curl openssl \
     && cd /usr/local/bin \
     && curl --location --silent --show-error --out gosu \
        https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 \
-    && curl --location --silent --show-error --out gosu.asc \
-       https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64.asc \
-    && gpg --keyserver ha.pool.sks-keyservers.net \
-       --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-    && gpg --batch --verify gosu.asc gosu \
     && chmod +x gosu \
-    && rm -r gosu.asc \
     && apk del --purge -r build-dependencies
 
 WORKDIR /work
