@@ -44,8 +44,7 @@ RUN apk --no-cache add --virtual build-deps build-base bash openssl go git \
     && apk del --purge -r build-deps
 
 FROM alpine:3.8
-RUN apk --no-cache add bash ca-certificates squashfs-tools libseccomp \
-    && rm -rf /lib/apk/*
+RUN apk --no-cache add bash ca-certificates squashfs-tools libseccomp
 COPY --from=build-app /usr/local /usr/local
 COPY --from=build-gosu /gosu /usr/local/bin/gosu
 WORKDIR /work

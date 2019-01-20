@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Set a proper group
 group=$(getent group "$(id -g)" | awk -F: '{print $1}')
