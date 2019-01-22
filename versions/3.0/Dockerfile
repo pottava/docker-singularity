@@ -11,7 +11,7 @@ RUN curl --location --silent --show-error --out /gosu \
 RUN chmod +x /gosu
 
 FROM alpine:3.8 AS build-app
-ENV SINGULARITY_VERESION=v3.0.2
+ENV SINGULARITY_VERESION=v3.0.3
 RUN apk --no-cache add --virtual build-deps build-base bash openssl go git \
       linux-headers openssl-dev util-linux-dev gawk \
     && : \
