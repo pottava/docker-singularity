@@ -1,8 +1,8 @@
-# Singularity v3.0
+# Singularity v3.1
 #
-# docker run --rm pottava/singularity:3.0
-# docker run --rm -it --privileged -v $(pwd):/work pottava/singularity:3.0 sh
-# docker run --rm --entrypoint cat pottava/singularity:3.0 /usr/local/etc/singularity/singularity.conf
+# docker run --rm pottava/singularity:3.1
+# docker run --rm -it --privileged -v $(pwd):/work pottava/singularity:3.1 sh
+# docker run --rm --entrypoint cat pottava/singularity:3.1 /usr/local/etc/singularity/singularity.conf
 
 FROM alpine:3.9 AS build-gosu
 RUN apk --no-cache add "curl=7.64.0-r1"
@@ -11,7 +11,7 @@ RUN curl --location --silent --show-error --out /gosu \
 RUN chmod +x /gosu
 
 FROM golang:1.12.0-alpine AS build-app
-ENV SINGULARITY_VERESION=v3.0.3
+ENV SINGULARITY_VERESION=v3.1.0
 RUN apk --no-cache add "build-base=0.5-r1" "linux-headers=4.18.13-r1" \
       "openssl-dev=1.1.1a-r1" "util-linux-dev=2.33-r0" "gawk=4.2.1-r0" \
       "git=2.20.1-r0" \
