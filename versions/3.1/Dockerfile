@@ -10,10 +10,10 @@ RUN curl --location --silent --show-error --out /gosu \
     https://github.com/tianon/gosu/releases/download/1.11/gosu-amd64
 RUN chmod +x /gosu
 
-FROM golang:1.12.0-alpine AS build-app
-ENV SINGULARITY_VERESION=v3.1.0
+FROM golang:1.12.4-alpine3.9 AS build-app
+ENV SINGULARITY_VERESION=v3.1.1
 RUN apk --no-cache add "build-base=0.5-r1" "linux-headers=4.18.13-r1" \
-      "openssl-dev=1.1.1a-r1" "util-linux-dev=2.33-r0" "gawk=4.2.1-r0" \
+      "openssl-dev=1.1.1b-r1" "util-linux-dev=2.33-r0" "gawk=4.2.1-r0" \
       "git=2.20.1-r0" \
     && mkdir -p /go/src/github.com/sylabs \
     && cd /go/src/github.com/sylabs \
@@ -23,7 +23,7 @@ RUN apk --no-cache add "build-base=0.5-r1" "linux-headers=4.18.13-r1" \
     && cd builddir \
     && make "-j$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1)" \
     && make install \
-    && rm -rf /usr/local/go
+    && rm -rf /usr/local/go /usr/local/etc/bash_completion.d
 
 FROM alpine:3.9
 RUN apk --no-cache add "bash=4.4.19-r1" "ca-certificates=20190108-r0" \
