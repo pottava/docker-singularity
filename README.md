@@ -4,8 +4,8 @@ http://singularity.lbl.gov/
 
 ## Supported tags and respective `Dockerfile` links:
 
-・latest ([versions/3.1/Dockerfile](https://github.com/pottava/docker-singularity/blob/master/versions/3.1/Dockerfile))  
-・3.1 ([versions/3.1/Dockerfile](https://github.com/pottava/docker-singularity/blob/master/versions/3.1/Dockerfile))  
+・latest ([versions/3.2/Dockerfile](https://github.com/pottava/docker-singularity/blob/master/versions/3.2/Dockerfile))  
+・3.2 ([versions/3.2/Dockerfile](https://github.com/pottava/docker-singularity/blob/master/versions/3.1/Dockerfile))  
 ・2.6 ([versions/2.6/Dockerfile](https://github.com/pottava/docker-singularity/blob/master/versions/2.6/Dockerfile))  
 
 ## Usage
@@ -13,8 +13,8 @@ http://singularity.lbl.gov/
 ### Test
 
 ```
-$ docker run --rm pottava/singularity:3.1 --version
-$ docker run --rm -it --privileged -v $(pwd):/work pottava/singularity:3.1 sh
+$ docker run --rm pottava/singularity:3.2 --version
+$ docker run --rm -it --privileged -v $(pwd):/work pottava/singularity:3.2 sh
 ```
 
 ### Configure
@@ -27,7 +27,7 @@ $ sudo sh -c 'cat << EOF > /usr/local/bin/singularity
 docker run --rm -it --privileged -e UID=\$(id -u) -e GID=\$(id -g) \\
   -v /var/run/docker.sock:/var/run/docker.sock \\
   -v \$(pwd):/home/singularity -v /tmp:/tmp -w /home/singularity \\
-  pottava/singularity:3.1 "\$@"
+  pottava/singularity:3.2 "\$@"
 EOF'
 $ sudo chmod +x /usr/local/bin/singularity
 ```
