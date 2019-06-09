@@ -2,7 +2,7 @@
 
 http://singularity.lbl.gov/
 
-[![pottava/singularity](http://dockeri.co/image/singularity/trivy)](https://hub.docker.com/r/pottava/singularity/)
+[![pottava/singularity](http://dockeri.co/image/pottava/singularity)](https://hub.docker.com/r/pottava/singularity/)
 
 ## Supported tags and respective `Dockerfile` links:
 
