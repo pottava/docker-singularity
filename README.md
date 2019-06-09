@@ -2,6 +2,8 @@
 
 http://singularity.lbl.gov/
 
+[![pottava/singularity](http://dockeri.co/image/singularity/trivy)](https://hub.docker.com/r/pottava/singularity/)
+
 ## Supported tags and respective `Dockerfile` links:
 
 ・latest ([versions/3.2/Dockerfile](https://github.com/pottava/docker-singularity/blob/master/versions/3.2/Dockerfile))  
